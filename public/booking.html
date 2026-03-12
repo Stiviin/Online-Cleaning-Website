@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book a Service</title>
+  <link rel="stylesheet" href="booking.css">
+</head>
+<body>
+
+  <nav class="navigation">
+    <div class="container">
+      <div class="mini-container">
+        <img id="i1" src="imag1.jpg" height="90" width="90">
+        <a href="main.html" class="logo">Essyklyn</a>
+      </div>
+      <ul class="menu"> 
+        <li><a href="main.html">Home</a></li>
+        <li><a href="rescleaning.html">Residential</a></li>
+        <li><a href="officecategories.html">Offices</a></li>
+      </ul>
+      
+      <!-- Login/Signup (Hidden when logged in) -->
+      <div id="login-signup" class="signup">
+        <a href="signup.html"><img src="signup5.png" height="22" width="32"></a>
+      </div>
+
+      <!-- User Info & Logout (Hidden when not logged in) -->
+      <div id="user-info" class="user-info" style="display: none;">
+        <span id="user-name"></span>
+        <a href="#" id="logout-link">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="booking-container">
+    <h1>Book a Service</h1>
+    <form id="booking-form">
+      <label for="service">Select Service:</label>
+      <select id="service" name="service" required>
+        <option value="1-bedroom" data-price="1" data-cleaners="1">1-Bedroom House</option>
+        <option value="2-bedroom" data-price="1500" data-cleaners="1">2-Bedroom House</option>
+        <option value="3-bedroom" data-price="2000" data-cleaners="2">3-Bedroom House</option>
+        <option value="bungalow" data-price="2500" data-cleaners="2">Bungalow</option>
+        <option value="mansion" data-price="4000" data-cleaners="3">Mansion</option>
+    </select>
+  
+      <label for="date">Select Date:</label>
+      <input type="date" id="date" name="date" required>
+  
+      <label for="time">Select Time:</label>
+      <select id="time" name="time" required>
+        <option value="08:00 AM">08:00 AM</option>
+        <option value="10:00 AM">10:00 AM</option>
+        <option value="12:00 PM">12:00 PM</option>
+        <option value="02:00 PM">02:00 PM</option>
+        <option value="04:00 PM">04:00 PM</option>
+      </select>
+  
+      <label for="address">Enter Address:</label>
+      <select id="address" name="address" required>
+        <option value="Mombasa Town">Mombasa Town</option>
+        <option value="Nyali">Nyali</option>
+        <option value="Tudor">Tudor</option>
+        <option value="Mtwapa/Shanzu">Mtwapa/Shanzu</option>
+        <option value="Likoni">Likoni</option>
+        <option value="Bamburi">Bamburi</option>
+        <option value="Miritini">Miritini</option>
+        <option value="Mikindani">Mikindani</option>
+        <option value="Changamwe/Magongo/Port-Reiz">Changamwe/Magongo/Port-Reiz</option>
+      </select>
+  
+      <h3>Total Price: <span id="price">Ksh 100</span></h3>
+      <h3>Assigned Cleaners: <span id="cleaners-count">1 Cleaner</span></h3>
+      
+      <!-- Hidden fields for backend processing -->
+      <input type="hidden" id="booking_type" name="booking_type" value="residential">
+      <input type="hidden" id="required_cleaners" name="required_cleaners" value="1">
+  
+      <button type="submit">Book Now</button>
+    </form>
+  </div>
+
+  <script>
+
+     // Fetch user info from the server
+     fetch("/user-info")
+        .then(response => response.json())
+        .then(data => {
+            if (data.user) {
+                document.getElementById("user-name").textContent = `${data.user.email}`;
+                document.getElementById("login-signup").style.display = "none"; // Hide login/signup
+                document.getElementById("user-info").style.display = "block"; // Show user info
+            } else {
+                document.getElementById("user-info").style.display = "none"; // Hide user info
+            }
+        })
+        .catch(error => {
+            console.error("Error fetching user info:", error);
+        });
+
+    // Logout functionality
+    document.getElementById("logout-link").addEventListener("click", (e) => {
+        e.preventDefault();
+        fetch("/logout", { method: "POST" })
+            .then(() => {
+                window.location.href = "/login";
+            })
+            .catch(error => {
+                console.error("Error logging out:", error);
+            });
+    });
+
+   // Dynamic price calculation
+   // Service configuration
+   document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('booking-form');
+
+    form.addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        const serviceSelect = document.getElementById('service');
+        const dateInput = document.getElementById('date');
+        const timeSelect = document.getElementById('time');
+        const addressSelect = document.getElementById('address');
+        const priceDisplay = document.getElementById('price');
+        const bookingTypeInput = document.getElementById('booking_type'); // Get the hidden field
+
+        const formData = {
+            user_id: 1, // Replace with actual user ID
+            service: serviceSelect.value,
+            date: dateInput.value,
+            time: convertTo24Hour(timeSelect.value), // You'll need the convertTo24Hour function here as well
+            address: addressSelect.value,
+            price: priceDisplay.textContent.replace('Ksh ', ''), // Extract price
+            booking_type: bookingTypeInput.value, // Get the value from the hidden field
+            status: 'Pending',
+            cleaner_id: null // Will be assigned by backend
+        };
+
+        try {
+            const response = await fetch('/api/bookings', { // Ensure this is the correct endpoint
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(result.error || 'Booking failed');
+            }
+
+            window.location.href = `payment.html?amount=${formData.price}&bookingId=${result.booking_id}`;
+        } catch (error) {
+            console.error('Booking error:', error);
+            alert(`Error: ${error.message}`);
+        }
+    });
+
+    function convertTo24Hour(time12h) {
+        const [time, modifier] = time12h.split(' ');
+        let [hours, minutes] = time.split(':');
+
+        if (hours === '12') hours = '00';
+        if (modifier === 'PM') hours = String(parseInt(hours, 10) + 12).padStart(2, '0');
+
+        return `${hours}:${minutes}:00`;
+    }
+
+    // You might need to add logic here to update the price display based on the selected service
+    const serviceSelect = document.getElementById('service');
+    const priceDisplay = document.getElementById('price');
+    const cleanersDisplay = document.getElementById('cleaners-count');
+
+    function updatePriceAndCleaners() {
+        const selectedOption = serviceSelect.options[serviceSelect.selectedIndex];
+        const price = selectedOption.dataset ? selectedOption.dataset.price : getPriceBasedOnService(selectedOption.value); // Adjust how you get the price
+        const cleaners = selectedOption.dataset ? selectedOption.dataset.cleaners : 1; // Adjust cleaner count
+
+        priceDisplay.textContent = `Ksh ${price}`;
+        cleanersDisplay.textContent = `${cleaners} Cleaner${cleaners > 1 ? 's' : ''}`;
+    }
+
+    function getPriceBasedOnService(service) {
+        // You'll need to define the prices for each residential service here
+        switch (service) {
+            case '1-bedroom': return 1;
+            case '2-bedroom': return 1;
+            case '3-bedroom': return 2000;
+            case 'bungalow': return 2500;
+            case 'mansion': return 4000;
+            default: return 100;
+        }
+    }
+
+    if (serviceSelect) {
+        serviceSelect.addEventListener('change', updatePriceAndCleaners);
+        updatePriceAndCleaners(); // Initial call to set price
+    }
+});
+  </script>
+</body>
+</html>
