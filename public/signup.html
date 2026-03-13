@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="signup.css" />
+    <script type="text/javascript" src="signup.js" defer></script>
+    <title>Sign Up</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="about-right">
+        <a href="main.html" class="logo">Essykyln</a>
+        <p id="p1">SIGN UP</p>
+        <p id="error-message"></p>
+        <form id="form">
+          <div class="row">
+            <div class="column">
+              <label for="fullname">Full Name</label>
+              <input type="text" id="fullname" placeholder="Full Name" required />
+            </div>
+            <div class="column">
+              <label for="email">Email</label>
+              <input type="email" id="email" placeholder="Email" required />
+            </div>
+            <div class="column">
+              <label for="phoneNo">Phone Number</label>
+              <input type="tel" id="phoneNo" placeholder="Phone Number" required />
+            </div>
+            <div class="column">
+              <label for="password">Password</label>
+              <input type="password" id="password" placeholder="Password" required />
+            </div>
+            <div class="column">
+              <label for="repeat-password">Repeat Password</label>
+              <input
+                type="password"
+                id="repeat-password"
+                placeholder="Repeat Password"
+                required
+              />
+            </div>
+          </div>
+          <br />
+          <div class="signIn">
+            <button type="submit">Sign Up</button>
+          </div>
+          <div class="register">
+            <p class="p1">Already have an account? <a href="login.html">Login</a></p>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      document.getElementById("form").addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const fullname = document.getElementById("fullname").value;
+        const email = document.getElementById("email").value;
+        const phoneNo = document.getElementById("phoneNo").value;
+        const password = document.getElementById("password").value;
+        const repeatPassword = document.getElementById("repeat-password").value;
+
+        const response = await fetch("http://localhost:3000/signup", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ fullname, email, phoneNo, password, repeatPassword }),
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+          alert("Signup successful!");
+          window.location.href = "login.html"; // Redirect to login page
+        } else {
+          document.getElementById("error-message").textContent = data.error;
+        }
+      });
+    </script>
+  </body>
+</html> 
