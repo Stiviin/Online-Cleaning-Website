@@ -1,0 +1,150 @@
+
+*after{
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	font-family: monospace, sans-serif;
+	font-weight: 500;
+}
+body{
+	font-family: monospace, sans-serif;
+	height: 150vh;
+	background: linear-gradient(135deg, #f0f2f0, #f5f7f6);
+	margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.logo{
+	display: flex;
+	height:10vh;
+	justify-content: center;
+	align-items: center;
+	font-size: 2.1rem;
+	color: #414141;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	font-weight: 100; 
+    text-decoration: none;
+}
+
+.container {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 350px;
+    max-width: 100%;
+    text-align: center;
+}
+
+
+#p1{
+	font-family: monospace, sans-serif;
+    font-size: 1.2rem;
+    color: #333333;
+    margin-bottom: 10px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.column {
+    margin-bottom: 10px;
+}
+
+label {
+	font-family: monospace, sans-serif;
+    font-size: 14px;
+    color: #555555;
+    display: block;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"]
+
+ {
+	font-family: monospace, sans-serif;
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="password"]:focus 
+{
+	font-family: monospace, sans-serif;
+    border-color: #66afe9;
+    outline: none;
+    box-shadow: 0 0 5px rgba(102, 175, 233, 0.6);
+}
+
+.signIn button {
+	font-family: monospace, sans-serif;
+    width: 100%;
+    padding: 10px;
+    background-color: sandybrown;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.signIn button:hover {
+    background-color: burlywood;
+}
+
+.register {
+    margin-top: 20px;
+}
+
+.register p {
+	font-family: monospace, sans-serif;
+    font-size: 14px;
+    color: #777777;
+}
+
+.register a {
+    color: #5cb85c;
+    text-decoration: none;
+}
+
+.register a:hover {
+    text-decoration: underline;
+}
+
+.incorrect input{
+    border-color: rgb(218, 72, 72);
+}
+form div.incorrect input{
+    border-color: red;
+}
+#error-message{
+    
+    font-family: monospace, sans-serif;
+    font-size: 12px;
+    color:  rgb(217, 87, 87);
+}
