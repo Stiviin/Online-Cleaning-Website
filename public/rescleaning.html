@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Residential Cleaning</title>
+    <link rel="stylesheet" href="rescleaning.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav class="navigation">
+    <div class="container">
+        <div class="mini-container">
+            <img id="i1" src="imag1.jpg" height=90 width=90>
+            <a href="#" class="logo">Essyklyn</a>
+        </div>
+        <ul class="menu"> 
+            <li><a href="main.html">Home</a></li>
+            <li><a href="rescleaning.html" class="active">Residential</a></li>
+            <li><a href="officecategories.html">Offices</a></li>
+        </ul>
+        
+        <!-- Login/Signup (Hidden when logged in) -->
+        <div id="login-signup" class="signup">
+            <a href="signup.html"><img src="signup5.png" height="22" width="32"></a>
+        </div>
+
+        <!-- User Info & Logout (Hidden when not logged in) -->
+        <div id="user-info" class="user-info" style="display: none;">
+            <span id="user-name"></span>
+            <a href="#" id="logout-link">Logout</a>
+        </div>
+    </div>
+</nav>
+
+    <section id="residential-cleaning">
+        <h1>Residential Cleaning Services</h1>
+        <p>Choose your house type for customized cleaning services.</p>
+        <div class="cleaning-options">
+            <!-- 1-Bedroom House -->
+            <div class="cleaning-box">
+              <img src="1-bedroom.avif" alt="1 Bedroom House" />
+              <h3>1-Bedroom House</h3>
+              <style>
+                h3{font-family: monospace, sans-serif;}
+              </style>
+              <p>Basic cleaning for small apartments.</p>
+              <p class="price">Ksh 800</p> <!-- Added price -->
+              <button class="book-now" data-service="1-bedroom" data-price="50">Book Now</button>
+            </div>
+          
+            <!-- 2-Bedroom House -->
+            <div class="cleaning-box">
+              <img src="2-bedroom.webp" alt="2 Bedroom House" />
+              <h3>2-Bedroom House</h3>
+              <p>Deep cleaning for medium-sized homes.</p>
+              <p class="price">Ksh 1000</p> <!-- Added price -->
+              <button class="book-now" data-service="2-bedroom" data-price="80">Book Now</button>
+            </div>
+          
+            <!-- 3-Bedroom House -->
+            <div class="cleaning-box">
+              <img src="3-bedroom.jpg" alt="3 Bedroom House" />
+              <h3>3-Bedroom House</h3>
+              <p>Deep cleaning for medium-sized homes.</p>
+              <p class="price">Ksh 1300</p> <!-- Added price -->
+              <button class="book-now" data-service="3-bedroom" data-price="100">Book Now</button>
+            </div>
+          
+            <!-- Bungalow -->
+            <div class="cleaning-box">
+              <img src="bungalow.jpg" alt="Bungalow" />
+              <h3>Bungalow Cleaning</h3>
+              <p>Full house cleaning for single-story homes.</p>
+              <p class="price">Ksh 1600</p> <!-- Added price -->
+              <button class="book-now" data-service="bungalow" data-price="120">Book Now</button>
+            </div>
+          
+            <!-- Mansion -->
+            <div class="cleaning-box">
+              <img src="mansion.jpg" alt="Mansion" />
+              <h3>Mansion Cleaning</h3>
+              <p>Luxury cleaning for large homes.</p>
+              <p class="price">Ksh 2000</p> <!-- Added price -->
+              <button class="book-now" data-service="mansion" data-price="200">Book Now</button>
+            </div>
+          </div>
+
+
+	<footer>
+		<div class="footer-container">
+	
+	
+				<div class="footer-logo">Essyklyn</div>
+	
+				<div class="footer-social">
+					<a href="https://www.facebook.com"><img src="ii4.png" height=30 width=30></a>
+					<a href="https://www.instagram.com/manchesterunited/"><img src="ii2.png" height=30 width=30></a>
+					<a href="https://www.twitter.com"><img src="ii3.png" height=30 width=30></a>
+					
+	
+	
+	</div>
+	
+	<div class="footer-menu">
+		<div class="footer-menu-box">
+	
+		
+	<ul>
+		<li><a href="contactus.html">Contact Us</a></li>
+		<li><a href="AboutUs.html">About Us</a></li>
+		<li><a href="our_services.html">Our Services</a></li>
+		<li><a href="privacypolicy.html">Privacy Policy</a></li>
+	</ul>
+	</div>
+	<div class="footer-menu-box">
+	<ul>
+		<li><a href="help.html">Help</a></li>
+		<li><a href="">Location & Hours</a></li>
+		<li><a href="template.html">Resources</a></li>
+		<li><a href="FAQ.html">FAQ</a></li>
+	</ul>
+	
+	</div>
+	
+	</div>
+	</footer>
+
+    <script>
+        // Booking functionality
+        document.querySelectorAll(".book-now").forEach(button => {
+            button.addEventListener("click", () => {
+                let service = button.getAttribute("data-service");
+                let price = button.getAttribute("data-price");
+                window.location.href = `/bookings?service=${service}&price=${price}`;
+            });
+        });
+
+
+        fetch("/user-info")
+        .then(response => response.json())
+        .then(data => {
+            if (data.user) {
+                document.getElementById("user-name").textContent = `${data.user.email}`;
+                document.getElementById("login-signup").style.display = "none"; // Hide login/signup
+                document.getElementById("user-info").style.display = "block"; // Show user info
+            } else {
+                document.getElementById("user-info").style.display = "none"; // Hide user info
+            }
+        })
+        .catch(error => {
+            console.error("Error fetching user info:", error);
+        });
+
+    // Logout functionality
+    document.getElementById("logout-link").addEventListener("click", (e) => {
+        e.preventDefault();
+        fetch("/logout", { method: "POST" })
+            .then(() => {
+                window.location.href = "/login";
+            })
+            .catch(error => {
+                console.error("Error logging out:", error);
+            });
+          });
+
+    </script>
+
+</body>
+</html>

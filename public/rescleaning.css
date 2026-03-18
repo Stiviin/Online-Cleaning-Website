@@ -1,0 +1,264 @@
+a{
+    text-decoration: none;
+}
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
+}
+a{
+    text-decoration: none;
+}
+.navigation {
+	font-family: monospace, sans-serif;
+    background-color: #ffffff; /* Background color of the navbar */
+    padding: 10px 0; /* Top and bottom padding */
+    position: relative;/* Ensures the signup button stays within the navbar */
+    width: 100%; /* Full-width navbar */
+    z-index: 1000; /* Ensures the navbar is above other content */
+}
+
+/* Container Styling */
+.navigation .container {
+    display: flex; /* Flexbox for alignment */
+    align-items: center; /* Vertically centers the content */
+     justify-content: space-between;/* Max-width for container */
+    margin: 0 auto; /* Center container */
+}
+.navigation .mini-container{
+	display: flex;
+	align-items: center;
+	margin: 0px 10px;
+}
+/* Logo Styling */
+.navigation .logo {
+    font-size: 28px; /* Logo font size */
+    font-weight: bold; /* Logo font weight */
+    color: gray; /* Logo text color */
+    text-decoration: none; /* Remove underline */
+}
+
+/* Menu Styling */
+.navigation .menu {
+    list-style: none; /* Remove bullet points */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    display: flex; /* Flexbox for horizontal menu */
+}
+
+/* Menu Item Styling */
+.navigation .menu li {
+	align-items: center;
+    margin-left: 20px; /* Space between menu items */
+}
+
+/* Menu Link Styling */
+.navigation .menu li a {
+    color: gray; /* Menu link color */
+    text-decoration: none; /* Remove underline */
+    font-size: 17px; /* Font size for links */
+    padding: 5px 10px; /* Padding around links */
+    transition: color 0.3s ease; /* Smooth transition for color change */
+}
+
+/* Active Link Styling */
+.navigation .menu li a.active,
+.navigation .menu li a:hover {
+    color: sandybrown; /* Color for active and hovered links */
+}
+
+/* Signup Button Styling */
+.navigation .signup a img {
+    vertical-align: middle; /* Align the image vertically in the middle */
+}
+  
+  .dashboard-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    color: sandybrown;
+    margin-bottom: 20px;
+  }
+  
+  .user-info {
+    margin-bottom: 30px;
+  }
+  
+  .user-info p {
+    margin: 10px 0;
+    font-size: 16px;
+  }
+
+/* Residential Cleaning Section */
+#residential-cleaning {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+#residential-cleaning h1 {
+    font-family: 'monospace','Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-transform: uppercase;
+    font-weight: 100;
+    color: sandybrown;
+    letter-spacing: 2px;
+}
+
+.cleaning-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    max-width: 1000px;
+    margin: 20px auto;
+}
+
+.cleaning-box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    font-weight: 200;
+	font-size: 1.1rem;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.cleaning-box:hover {
+    transform: translateY(-5px);
+}
+
+.cleaning-box img {
+    width: 100%;
+    max-height: 180px;
+    border-radius: 10px;
+}
+
+.cleaning-box h3 {
+    color: sandybrown;
+    margin: 15px 0;
+}
+
+.cleaning-box p {
+    font-size: 14px;
+    color: #555;
+}
+
+.book-now {
+    background-color: sandybrown;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+.book-now:hover {
+    background-color: #cc5200;
+}
+
+/* Footer */
+footer{
+	background-color: #f5f5f5;
+	padding: 60px 10px;
+	position: relative;
+	margin-top: 20px;
+	border-top: 1px solid rgba(0, 0, 0, 0.04);
+}
+.footer-container{
+    list-style-type: none;
+    text-decoration: none;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	width: 75%;
+	margin: 10px auto;
+}
+.footer-logo-container{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.footer-logo{
+	font-family: monospace, sans-serif;
+	width: 150px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 2rem;
+	color: black;
+	text-transform: uppercase;
+	font-weight: 800;
+	letter-spacing: 1px;
+}
+.footer-logo-container span{
+	color: #888888;
+	font-weight: 400;
+	margin: 1px 0px;
+	font-size: 0.8rem;
+	padding: 4px;
+}
+.footer-social{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.footer-social a{
+margin: 0px 6px;
+border-radius: 50%;
+color: black;
+background-color: #ffffff;
+border: 1px;
+width: 30px;
+height: 30px;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+.footer-social a:hover{
+	background-color: #e6e8e6;
+	color: #ffffff;
+	transition: all ease 0.2s;
+}
+.footer-menu{
+    list-style-type: none;
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.footer-menu-box{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin: 0px 30px;
+}
+.footer-menu-box strong{
+	color: #000000;
+	font-weight: 500;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	margin-bottom: 5px;
+}
+.footer-menu-box ul li a,
+.footer-menu-box ul li {
+    list-style-type: none;
+	color: #888888;
+	font-size: 0.9rem;
+	margin: 5px 0px;
+}
+.footer-menu-box ul li a:hover{
+	color: #000000;
+	transition: all ease 0.3s;
+} 
