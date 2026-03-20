@@ -1,0 +1,41 @@
+html{
+	font-family: 'lucida-grande',sans-serif;
+    background-color: #ffffff;
+    color: #000000;
+    font-family: 'Poppins', sans-serif;
+}
+  .logo{
+	font-size: 2.1rem;
+	color: #414141;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	font-weight: 100; 
+	font-family: monospace; 
+}
+#about-section{
+	width: 60%;
+	height: auto;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 40px 14%;
+}
+.about-right{
+	width: 55%;
+	line-height: -10px;  
+}
+.about-right ul li{
+    display: flex;
+    align-items: flex-end;
+}
+.about-right h1{
+	color: sandybrown;
+	font-size: 25px;
+	margin-bottom: 5px;
+	font-family: monospace; 
+}
+.about-right p{
+	color: #000000;
+	line-height: 20px;
+    font-size: 15px;
+}
