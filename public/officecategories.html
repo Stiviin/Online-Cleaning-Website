@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commercial Cleaning</title>
+    <link rel="stylesheet" href="officecategories.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navigation">
+        <div class="container">
+            <div class="mini-container">
+                <img id="i1" src="imag1.jpg" height=90 width=90>
+                <a href="#" class="logo">Essyklyn</a>
+            </div>
+            <ul class="menu"> 
+                <li><a href="main.html">Home</a></li>
+                <li><a href="rescleaning.html">Residential</a></li>
+                <li><a href="officecategories.html" class="active">Offices</a></li>
+            </ul>
+            
+            <!-- Login/Signup (Hidden when logged in) -->
+            <div id="login-signup" class="signup">
+                <a href="signup.html"><img src="signup5.png" height="22" width="32"></a>
+            </div>
+    
+            <!-- User Info & Logout (Hidden when not logged in) -->
+            <div id="user-info" class="user-info" style="display: none;">
+                <span id="user-name"></span>
+                <a href="#" id="logout-link">Logout</a>
+            </div>
+        </div>
+    </nav>
+    
+    <header class="hero">
+        <h1>Office Cleaning Services</h1>
+        <p>Let us handle the cleaning while you focus on growing your business.</p>
+    </header>
+    
+    <section class="services">
+        <h2>Our Office Cleaning Services</h2>
+        <div class="service-list">
+            <div class="service-card">
+                <img src="office2.webp" alt="Office Cleaning">
+                <div class="card-content">
+                    <h3>Large office</h3>
+                    <p>We provide daily, weekly or monthly office cleaning services to keep your workplace hygienic.</p>
+                    <p class="price">Ksh 10,000</p>
+                    <a href="officebooking.html" class="book-now">Book Now</a>
+                </div>
+            </div>
+            <div class="service-card">
+                <img src="small-office.jpg" alt="Restaurant Cleaning">
+                <div class="card-content">
+                    <h3>Small offices</h3>
+                    <p>Maintain a clean and safe environment for staff and customers with our deep cleaning services.</p>
+                    <p class="price">Ksh 5000</p>
+                    <a href="officebooking.html" class="book-now">Book Now</a>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- <section class="booking-cta">
+        <h2>Book Your Cleaning Service Today</h2>
+    </section>
+-->
+    <footer> 
+        <div class="footer-container">
+    
+    
+                <div class="footer-logo">Essyklyn</div>
+    
+                <div class="footer-social">
+                    <a href="https://www.facebook.com"><img src="ii4.png" height=30 width=30></a>
+                    <a href="https://www.instagram.com/manchesterunited/"><img src="ii2.png" height=30 width=30></a>
+                    <a href="https://www.twitter.com"><img src="ii3.png" height=30 width=30></a>
+                    
+    
+    
+    </div>
+    
+    <div class="footer-menu">
+        <div class="footer-menu-box">
+    
+        
+    <ul>
+        <li><a href="contactus.html">Contact Us</a></li>
+        <li><a href="AboutUs.html">About Us</a></li>
+        <li><a href="our_services.html">Our Services</a></li>
+        <li><a href="privacypolicy.html">Privacy Policy</a></li>
+    </ul>
+    </div>
+    <div class="footer-menu-box">
+    <ul>
+        <li><a href="help.html">Help</a></li>
+        <li><a href="">Location & Hours</a></li>
+        <li><a href="template.html">Resources</a></li>
+        <li><a href="FAQ.html">FAQ</a></li>
+    </ul>
+    
+    </div>
+    
+    </div>
+    </footer>
+   <script>
+    
+     // Fetch user info from the server
+     fetch("/user-info")
+        .then(response => response.json())
+        .then(data => {
+            if (data.user) {
+                document.getElementById("user-name").textContent = `${data.user.email}`;
+                document.getElementById("login-signup").style.display = "none"; // Hide login/signup
+                document.getElementById("user-info").style.display = "block"; // Show user info
+            } else {
+                document.getElementById("user-info").style.display = "none"; // Hide user info
+            }
+        })
+        .catch(error => {
+            console.error("Error fetching user info:", error);
+        });
+
+    // Logout functionality
+    document.getElementById("logout-link").addEventListener("click", (e) => {
+        e.preventDefault();
+        fetch("/logout", { method: "POST" })
+            .then(() => {
+                window.location.href = "/login";
+            })
+            .catch(error => {
+                console.error("Error logging out:", error);
+            });
+    });
+
+   </script>
+
+</body>
+</html>
